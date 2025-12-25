@@ -310,6 +310,43 @@ $(function() {
         createPost(authorVal, contentVal);
     });
 
+    let darkMode = false;
+
+// ブラックモード／ライトモード切替
+$('#change').on('click', () => {
+    if (!darkMode) {
+        // ブラックモードに変更
+        $('body').css({'background-color': '#121212', 'color': '#FFFFFF'});
+
+        $('.form-control, .posts-container, .post-form').css({
+            'background-color': '#1E1E1E',
+            'color': '#FFFFFF'
+        });
+
+        // 投稿本文をはっきり表示
+        $('.post .post-content').css({
+            'color': '#F1F1F1',
+            'font-size': '16px',
+            'line-height': '1.6'
+        });
+
+        // ボタン文字も白に
+        $('button').css({'color': '#FFFFFF'});
+
+        darkMode = true;
+    } else {
+        // ライトモードに戻す
+        $('body, .form-control, .posts-container, .post-form, .post .post-content, button').css({
+            'background-color': '',
+            'color': '',
+            'font-size': '',
+            'line-height': ''
+        });
+
+        darkMode = false;
+    }
+});
+
     // 投稿一覧表示順序選択
     $('#sortOrder').on('change', loadPosts);
 
@@ -327,6 +364,7 @@ window.addEventListener('unload', function() {
     </script>
 </head>
 <body>
+    <button id="change" class="btn-secondary">色反転</button>
     <div class="container">
         <h1>掲示板アプリ</h1>
 
